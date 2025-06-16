@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/carousel";
 
 export default async function Home({ searchParams }) {
-  const baseUrl = "http://localhost:1337";
+  const baseUrl = "https://great-sunshine-1e8ef876e6.strapiapp.com";
   const selectedCategory = searchParams?.category || null;
   
   let products = [];
