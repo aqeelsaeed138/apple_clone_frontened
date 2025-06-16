@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const BASE_URL = "http://localhost:1337";
+const BASE_URL = "https://great-sunshine-1e8ef876e6.strapiapp.com";
 
 export default function CategoryCarousel({ categories, selectedCategory }) {
   const [api, setApi] = useState();
