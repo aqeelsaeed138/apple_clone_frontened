@@ -38,13 +38,14 @@ export default function CategoryCarousel({ categories, selectedCategory }) {
     };
   }, [api]);
 
-  const getImageUrl = (image) => {
-    return BASE_URL + (
-      image?.formats?.small?.url ||
-      image?.formats?.thumbnail?.url ||
-      image?.url
-    );
-  };
+ const getImageUrl = (image) => {
+  const url =
+    image?.formats?.small?.url ||
+    image?.formats?.thumbnail?.url ||
+    image?.url;
+
+  return url?.startsWith("http") ? url : BASE_URL + url;
+};
 
   return (
     <div className="w-full bg-gray-100">

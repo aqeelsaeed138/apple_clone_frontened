@@ -14,7 +14,7 @@ import {
 export default async function Home({ searchParams }) {
   const baseUrl = "https://great-sunshine-1e8ef876e6.strapiapp.com";
   const selectedCategory = searchParams?.category || null;
-  
+
   let products = [];
   try {
     const res = await fetch(`${baseUrl}/api/products?populate=*`);
@@ -39,7 +39,7 @@ export default async function Home({ searchParams }) {
   // Filter products by selected category if one is selected
   let filteredProducts = products;
   if (selectedCategory) {
-    filteredProducts = products.filter(product => 
+    filteredProducts = products.filter(product =>
       product.category?.slug === selectedCategory
     );
   }
@@ -49,14 +49,14 @@ export default async function Home({ searchParams }) {
   filteredProducts.forEach(product => {
     const categoryName = product.category?.name || "Uncategorized";
     if (!productsByCategory[categoryName]) {
-      productsByCategory[categoryName] = [];  
+      productsByCategory[categoryName] = [];
     }
     productsByCategory[categoryName].push(product);
   });
 
   // Find the selected category name for display
-  const selectedCategoryName = selectedCategory 
-    ? categories.find(cat => cat.slug === selectedCategory)?.name 
+  const selectedCategoryName = selectedCategory
+    ? categories.find(cat => cat.slug === selectedCategory)?.name
     : null;
 
   return (
@@ -69,12 +69,12 @@ export default async function Home({ searchParams }) {
 
       <CategoryCarousel categories={categories} selectedCategory={selectedCategory} />
 
-{Object.keys(productsByCategory).length === 0 ? (
+      {Object.keys(productsByCategory).length === 0 ? (
         <div className="text-center py-20">
           <h2 className="text-xl text-gray-600">No products found in this category.</h2>
         </div>
       ) : (
-        Object.entries(productsByCategory).map(([categoryName, items]) => (   
+        Object.entries(productsByCategory).map(([categoryName, items]) => (
           <div key={categoryName} className="mb-16">
             <h2 className="text-2xl font-semibold mb-4 ml-13 sm:ml-25">{categoryName}</h2>
 
@@ -88,11 +88,12 @@ export default async function Home({ searchParams }) {
             >
               <CarouselContent className="px-6">
                 {items.map((product, index) => {
-                  const imageUrl =
-                    baseUrl +
-                    (product.image?.formats?.small?.url ||
-                      product.image?.formats?.thumbnail?.url ||
-                      product.image?.url);
+                  const imageUrl = (
+                    product.image?.formats?.small?.url ||
+                    product.image?.formats?.thumbnail?.url ||
+                    product.image?.url
+                  );
+
 
                   return (
                     <CarouselItem
@@ -167,8 +168,8 @@ export default async function Home({ searchParams }) {
       )}
       {selectedCategory && (
         <div className="flex justify-center py-16">
-          <Link 
-            href="/store" 
+          <Link
+            href="/store"
             className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
           >
             View All Products
